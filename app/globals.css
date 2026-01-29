@@ -1,0 +1,40 @@
+/* 1. PRIMEIRO: Todos os imports externos */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Tenor+Sans&display=swap');
+@import "tailwindcss";
+
+/* 2. DEPOIS: Configurações do Tailwind v4 */
+@theme {
+  --font-playfair: "Playfair Display", serif;
+  --font-tenor: "Tenor Sans", sans-serif;
+  --color-gold-brand: #C5A267;
+  --color-bronze-brand: #927B59;
+  --color-cream-brand: #e7ca9d;
+  --color-bg-graphite: #121212;
+}
+
+@theme {
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  --animate-marquee: marquee 30s linear infinite;
+}
+
+/* 3. FINALMENTE: Regras de base e personalizações */
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+  
+  body {
+    background-color: black;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    /* Usamos a variável definida no @theme */
+    font-family: var(--font-tenor);
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-playfair);
+  }
+}
