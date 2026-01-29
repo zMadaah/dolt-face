@@ -1,13 +1,16 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
+import { Plus, X } from 'lucide-react';
 
 export default function FinalSection() {
+  const [showCards, setShowCards] = useState(false);
+
   return (
     <section className="relative w-full font-tenor text-white overflow-hidden bg-black">
       
       {/* SEÇÃO 1: IMAGEM E CONTEÚDO SUPERIOR */}
-      <div className="relative w-full min-h-[700px] md:min-h-[600px] flex flex-col items-center justify-start pt-12 pb-20 px-6">
+      <div className="relative w-full min-h-[750px] md:min-h-[600px] flex flex-col items-center justify-start pt-12 pb-20 px-6">
         
         {/* IMAGEM DE FUNDO */}
         <div className="absolute inset-0 z-0">
@@ -16,8 +19,7 @@ export default function FinalSection() {
             alt="Liderança Dolt Face" 
             className="w-full h-full object-cover object-top md:object-center"
           />
-          {/* Gradiente escuro para garantir contraste no mobile */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/90 md:from-black/40 md:to-black/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/90 md:from-black/40 md:to-black/80" />
         </div>
 
         {/* TÍTULO CENTRALIZADO */}
@@ -30,11 +32,22 @@ export default function FinalSection() {
           </h2>
         </div>
 
-        {/* CONTAINER DE TEXTOS: CARDS NO MOBILE / COLUNAS NO DESKTOP */}
-        <div className="relative z-10 w-full max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-stretch md:items-start gap-6 md:gap-0">
+        {/* BOTÃO SAIBA MAIS (VISÍVEL APENAS NO MOBILE) */}
+        {!showCards && (
+          <button 
+            onClick={() => setShowCards(true)}
+            className="md:hidden relative z-20 mt-4 flex items-center gap-3 px-8 py-3 border border-[#e7ca9d]/40 bg-black/40 backdrop-blur-md rounded-full text-[#e7ca9d] text-xs uppercase tracking-[0.2em] transition-all active:scale-95"
+          >
+            <Plus size={14} />
+            Saiba Mais
+          </button>
+        )}
+
+        {/* CONTAINER DE TEXTOS: CARDS REVELADOS OU COLUNAS DESKTOP */}
+        <div className={`relative z-10 w-full max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-stretch md:items-start gap-6 md:gap-0 transition-all duration-700 ${showCards ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none md:opacity-100 md:translate-y-0 md:pointer-events-auto'}`}>
           
           {/* Card Liderança 1: Dra. Gel Venancio */}
-          <div className="flex-1 max-w-full md:max-w-[320px] p-6 md:p-0 bg-black/40 md:bg-transparent backdrop-blur-md md:backdrop-blur-0 border border-white/10 md:border-none rounded-lg md:rounded-none">
+          <div className="flex-1 max-w-full md:max-w-[320px] p-6 md:p-0 bg-black/60 md:bg-transparent backdrop-blur-xl md:backdrop-blur-0 border border-[#e7ca9d]/20 md:border-none rounded-2xl md:rounded-none">
             <div className="space-y-4">
               <h3 className="font-playfair text-[#e7ca9d] text-xl md:text-lg italic border-l border-[#e7ca9d]/60 pl-4 md:pl-3">
                 Dra. Gel Venancio
@@ -46,7 +59,7 @@ export default function FinalSection() {
           </div>
 
           {/* Card Liderança 2: Abraão Veríssimo */}
-          <div className="flex-1 max-w-full md:max-w-[320px] p-6 md:p-0 bg-black/40 md:bg-transparent backdrop-blur-md md:backdrop-blur-0 border border-white/10 md:border-none rounded-lg md:rounded-none md:text-right">
+          <div className="flex-1 max-w-full md:max-w-[320px] p-6 md:p-0 bg-black/60 md:bg-transparent backdrop-blur-xl md:backdrop-blur-0 border border-[#e7ca9d]/20 md:border-none rounded-2xl md:rounded-none md:text-right mt-4 md:mt-0">
             <div className="space-y-4">
               <h3 className="font-playfair text-[#e7ca9d] text-xl md:text-lg italic border-l md:border-l-0 md:border-r border-[#e7ca9d]/60 pl-4 md:pl-0 md:pr-3">
                 Abraão Veríssimo
@@ -56,6 +69,16 @@ export default function FinalSection() {
               </p>
             </div>
           </div>
+
+          {/* Botão para fechar no mobile */}
+          {showCards && (
+            <button 
+              onClick={() => setShowCards(false)}
+              className="md:hidden mt-6 self-center text-[#e7ca9d]/60 text-[10px] uppercase tracking-widest flex items-center gap-2"
+            >
+              <X size={12} /> Fechar
+            </button>
+          )}
           
         </div>
       </div>
